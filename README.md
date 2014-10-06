@@ -1,4 +1,4 @@
 busfactor
 =========
 
-There's nothing to s here yet
+git log --abbrev-commit --decorate --all --name-status --date=iso
