@@ -1,0 +1,386 @@
+commit 8e7abf2289fa1d50b696adabe4216c2170ef51f5
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Wed Sep 17 15:10:21 2014 -0400
+
+    Added Steve Earle to Treme.
+
+M	data.json
+
+commit 9945e340046ba3a7ffed1ef3b75bfc933da24425
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Thu Jul 19 17:10:15 2012 -0400
+
+    Added the new typekit embed code.
+
+M	index.html
+
+commit aa3950fa099850d820fab958c5fd997f54f55fec
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Tue Jul 10 16:30:31 2012 -0400
+
+    Tweaked the link for the running version of the page.
+
+M	README.md
+
+commit e55e3ee74cbbc8e286d506ea55943382f45cfe1f
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Wed Jun 13 21:43:20 2012 -0400
+
+    Added Dominic Chianese to the graph.
+
+M	data.json
+
+commit 2d03a31994edd7d9cf96afefe1cc71e3d3f173e1
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Sat Nov 12 22:39:44 2011 -0500
+
+    Added the link to the fastcodesign site.
+
+M	index.html
+
+commit f2a1f869e5ac7009f5a056270894893fbfa5d25d
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Sun Oct 16 09:04:22 2011 -0400
+
+    Added the Google analytics code to the header.
+
+M	index.html
+
+commit 25cd38d6bbcee5e2a36818b2b8831a14e93260d8
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Wed Oct 12 06:44:41 2011 -0400
+
+    Added a few more connections noticed by Nath Pizzolatto.
+
+M	data.json
+
+commit daed1b55c819be13ee10483b9e11079300cd8b63
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Tue Oct 4 13:08:02 2011 -0400
+
+    Tweaked the column width of the column wrap for wider screens.
+
+M	recycle.css
+
+commit 7771551ea56d393ec05876554c79051c507b19e7
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Tue Oct 4 06:45:21 2011 -0400
+
+    Added a new actor to the recycling list.
+
+M	data.json
+M	recycle.js
+
+commit 76f6795e200142c4283f5e9a70a121405271bcb4
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Sat Sep 24 15:07:34 2011 -0400
+
+    Fixed the spelling of Edoardo Ballerini's name.
+
+M	data.json
+
+commit 4a2b5201579ab2f5e24f99277374c15c00b3219d
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Mon Aug 29 14:30:27 2011 -0400
+
+    Changed the column width to avoid text overlapping the main graph.
+
+M	recycle.css
+
+commit bfeb79611fe64042b74fff521cadd4212165e2fc
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Fri Aug 26 20:18:07 2011 -0400
+
+    We are now removing on extra loop and drawing all dots properly when we do multiple selection.
+
+M	recycle.js
+
+commit 3515bdb9ebfb910dcaa50c11b9f693820efcad3b
+Author: Jonathan Puckey <me@jonathanpuckey.com>
+Date:   Fri Aug 26 20:15:33 2011 +0200
+
+    Rewrite recycle.js a bit.
+
+M	recycle.js
+
+commit b15b674248b76b4f013e2ccb1379a1a5361ace8d
+Author: Jonathan Puckey <me@jonathanpuckey.com>
+Date:   Fri Aug 26 18:11:50 2011 +0200
+
+    Include width already, to make the page render more nicely.
+
+M	index.html
+
+commit b056135e378b1a5fe2e434563774457a142f1de5
+Author: Jonathan Puckey <me@jonathanpuckey.com>
+Date:   Fri Aug 26 17:29:27 2011 +0200
+
+    Use correct way to redraw the view.
+
+M	recycle.js
+
+commit 3c87b53ed8c328751822bdaad1bc92dced2b81cf
+Author: Jonathan Puckey <me@jonathanpuckey.com>
+Date:   Fri Aug 26 17:25:55 2011 +0200
+
+    Fix redraw problem.
+
+M	index.html
+M	paper.js
+M	recycle.js
+
+commit b768322b7a1bdbe0649251eda82ff214db410a45
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Tue Aug 23 17:12:13 2011 -0400
+
+    The page is now using different styling for links within the page and external links.
+
+M	index.html
+M	recycle.css
+
+commit 647c6d7eeb41ef8fdfde6375d67b5bb2b036d953
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Tue Aug 23 11:41:28 2011 -0400
+
+    Added a new link showing two shows instead of just one.
+
+M	index.html
+M	recycle.js
+
+commit e0d548b00f2e6909a9614f1f1af3827291f2eb26
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Tue Aug 23 11:24:54 2011 -0400
+
+    We are now selecting all of the shows when you click an actor link.
+
+M	recycle.js
+
+commit a2a0e98e01e57b1c976c7f5c5d95adae17102e8d
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Tue Aug 23 07:49:37 2011 -0400
+
+    A little line editing.
+
+M	index.html
+
+commit bfc2f2599ff0382d92bc2a29dff8928d7641f0f3
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Tue Aug 23 07:19:01 2011 -0400
+
+    Fixed another couple of typos.
+
+M	index.html
+
+commit 134435f93982ce9ac27e500444a6217ae7b60585
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Tue Aug 23 07:16:28 2011 -0400
+
+    Fixed a couple of typos.
+
+M	index.html
+
+commit 34ade8403e51f095024a75b514c1f172744e5b18
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Tue Aug 23 07:10:35 2011 -0400
+
+    We are now showing text in columns and describing the graphic in much greater detail with links to show various highlights.
+
+M	index.html
+M	recycle.css
+M	recycle.js
+
+commit c8cf44bd7e27d3bfab7d254c0e9f29a48a6e6bce
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Sun Aug 21 16:56:35 2011 -0300
+
+    Added a few links and fixed a typo in the read me.
+
+M	README.md
+
+commit 5ae889c880d168c85a54581fe8a406007b369b33
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Sun Aug 21 07:59:05 2011 -0400
+
+    Made a number of typography tweaks, started using Typekit, and switched to FF Gothic.
+
+M	index.html
+M	recycle.css
+M	recycle.js
+
+commit 0fbbbb695a3f590d8c106896671db9b00b6bc8e7
+Author: Zack Grossbart <zack@zack-grossbarts-macbook.local>
+Date:   Sat Aug 20 20:42:10 2011 -0400
+
+    Fixed a small typo in the data and set fonts for the main image.
+
+M	data.json
+M	recycle.js
+
+commit 76ee893c3ba5b91eb03d82c51b817a30f355bbb2
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Sat Aug 20 17:32:17 2011 -0400
+
+    Removed a console log message.
+
+M	index.html
+
+commit 514e1a535e48f5855619d043d1555f9e35f33383
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Sat Aug 20 17:29:44 2011 -0400
+
+    Added a message for when the browser doesn't support canvas.
+
+M	index.html
+M	recycle.css
+
+commit 091c2901356c6542f3c46f222d604504aa67c48c
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Sat Aug 20 17:12:29 2011 -0400
+
+    Changed the page title.
+
+M	index.html
+
+commit 4d2e7da51ce0cddb6035320132fcc7567b2bbdb4
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Sat Aug 20 17:08:33 2011 -0400
+
+    Made a few more spacing and styling tweaks and added my name to the bottom of the page.
+
+M	index.html
+M	recycle.css
+M	recycle.js
+
+commit 490d980304dc2d6dcf7c0da5fd278a5d74e6efa2
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Sat Aug 20 13:28:49 2011 -0400
+
+    Added a diacritical marks for Carnivale and Luis Guzman.
+
+M	data.json
+
+commit 049da9279ccfe105a49fb012c7e51e5da4c76050
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Sat Aug 20 11:06:03 2011 -0400
+
+    We are now referencing all the JavaScript files locally.
+
+D	index.htm
+A	index.html
+
+commit 1fda2dcd8208a6c45da0f54beaf84169d25efc61
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Sat Aug 20 10:48:38 2011 -0400
+
+    Fixed a typo in the README file.
+
+M	README.md
+M	index.htm
+
+commit 1b451c4c09d21b480c9264e94bc172a8fa636d05
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Sat Aug 20 07:58:45 2011 -0400
+
+    Added some more styling to the titles and paragraphs.
+
+M	recycle.css
+
+commit f2b69f618b06aeb5d60b245f774b97b0126c7125
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Sat Aug 20 07:54:34 2011 -0400
+
+    Changed the resize style of the canvas, tweaked the colors, and added a bunch more code comments.
+
+M	index.htm
+M	recycle.js
+
+commit fde1f3b9d5ecc4a4849d3d9df6517291743da017
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Fri Aug 19 22:01:37 2011 -0400
+
+    Filled out the README file.
+
+M	README.md
+M	index.htm
+
+commit 6a6fb146413ceb1491bbeaf4af2be0bf319108d9
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Fri Aug 19 21:50:41 2011 -0400
+
+    Added a README file.
+
+A	README.md
+
+commit 8d1cfc3f5e680e867402de6ced21c40d36eec823
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Fri Aug 19 21:45:44 2011 -0400
+
+    Removed underscore.js.
+
+D	underscore.js
+
+commit 4e6a5692dd9ad7a21de52352271ffc3c53021990
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Fri Aug 19 21:45:30 2011 -0400
+
+    Added back the reference to underscore on the CDN.
+
+M	index.htm
+
+commit 2d442b69eacdf2b06111827e957eec188397711f
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Fri Aug 19 21:43:38 2011 -0400
+
+    Tweaked the width of the canvas.
+
+M	recycle.js
+
+commit 4e2a08b59b5a048f4f306086d123e61e91b95898
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Fri Aug 19 21:42:29 2011 -0400
+
+    Added back the text, removed the CSS, and made the canvas resizable
+
+M	index.htm
+M	recycle.css
+
+commit 5d7e92c90f56d4e87e50536d1ccd82a11b999d15
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Fri Aug 19 21:33:46 2011 -0400
+
+    Renamed a few files.
+
+M	index.htm
+A	recycle.css
+A	recycle.js
+D	rel.css
+D	rel.js
+D	rp.js
+
+commit 6e34c68fee6a5305e3f508812f6bd063711a1a8f
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Fri Aug 19 21:30:44 2011 -0400
+
+    Went back to the previous working version.
+
+D	README.md
+M	index.htm
+D	recycle.css
+D	recycle.js
+A	rel.css
+A	rel.js
+A	rp.js
+A	underscore.js
+
+commit 558623138125ae2e6a562e66ebab64e63e94cca8
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   Fri Aug 19 19:41:55 2011 -0400
+
+    This is the first GIT version of this application.
+
+A	README.md
+A	data.json
+A	index.htm
+A	paper.js
+A	recycle.css
+A	recycle.js
