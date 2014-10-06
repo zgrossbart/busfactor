@@ -34,8 +34,12 @@ bflog = {
                 currentComment = null;
                 currentLog = {};
                 currentLog.files = [];
-                currentLog.commit = line.substring(bflog.ITEM_START.length, line.indexOf(' ', bflog.ITEM_START.length)).trim();
-//                console.log('currentLog.commit: ' + currentLog.commit);
+                currentLog.comment = '';
+                if (line.indexOf(' ', bflog.ITEM_START.length) > 0) {
+                    currentLog.commit = line.substring(bflog.ITEM_START.length, line.indexOf(' ', bflog.ITEM_START.length)).trim();
+                } else {
+                    currentLog.commit = line.substring(bflog.ITEM_START.length, line.length).trim();
+                }
                 logs.push(currentLog);
             } else if (currentLog === null) {
                 // This represnts a parsing error.  We should always have a current
@@ -78,6 +82,9 @@ bflog = {
                 currentLog.files.push(file);
                 
 //                console.log('currentLog.file: ' + currentLog.file.format());
+            } else if (line.indexOf('\t') === 0) {
+                // Other lines in the log are comment lines
+                currentLog.comment += line; 
             }
                 
         }

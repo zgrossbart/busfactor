@@ -6,3 +6,58 @@ Date:   2014-09-17 15:10:50 -0400
 
 M	data.json
 
+commit 8e7abf2 (HEAD, origin/master, origin/HEAD, master)
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   2014-09-17 15:10:21 -0400
+
+    Added Steve Earle to Treme.
+
+M	data.json
+
+commit 05ac04c
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   2012-07-19 17:10:47 -0400
+
+    Added the new typekit embed code.
+
+M	index.html
+
+commit 9945e34
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   2012-07-19 17:10:15 -0400
+
+    Added the new typekit embed code.
+
+M	index.html
+
+commit aa3950f
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   2012-07-10 16:30:31 -0400
+
+    Tweaked the link for the running version of the page.
+
+M	README.md
+
+commit 4af8a54
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   2012-06-13 21:43:37 -0400
+
+    Added Dominic Chianese to the graph.
+
+M	data.json
+
+commit e55e3ee
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   2012-06-13 21:43:20 -0400
+
+    Added Dominic Chianese to the graph.
+
+M	data.json
+
+commit 6bb2f44
+Author: Zack Grossbart <zack@grossbart.com>
+Date:   2011-11-12 22:40:07 -0500
+
+    Added the link to the fastcodesign site.
+
+M	index.html
