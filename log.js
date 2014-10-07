@@ -1,4 +1,4 @@
-bflog = {
+var bflog = {
     ITEM_START: 'commit ',
     AUTHOR_START: 'Author: ',
     DATE_START: 'Date:   ',
@@ -63,11 +63,7 @@ bflog = {
                 // M	data.json
 //                console.log('line: ' + line);
                 var file = {};
-                
-                file.format = function() {
-                    return this.action + ' - ' + this.name;
-                };
-                
+                            
                 if (line.trim().indexOf(bflog.MODIFY_START) === 0) {
                     file.action = bflog.MODIFY;
                     file.name = line.trim().substring(bflog.MODIFY_START.length, line.length).trim();

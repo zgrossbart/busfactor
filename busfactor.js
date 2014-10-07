@@ -1,5 +1,4 @@
-
-busfactor = {
+var busfactor = {
     
     loadLog: function(/*String*/ url) {
         $.get(url, function (data) {
