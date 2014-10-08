@@ -18,6 +18,9 @@
   "browser": true,
   "jquery": true,
   "devel": true,
+  "globals": {
+      "bflog": false
+  },
   "predef": [ "_", "moment" ],
   "maxparams": 7,
   "maxdepth": 7,

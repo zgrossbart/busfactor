@@ -1,3 +1,5 @@
+
+/*global bflog:true */
 var bflog = {
     ITEM_START: 'commit ',
     AUTHOR_START: 'Author: ',
