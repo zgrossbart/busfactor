@@ -45,13 +45,13 @@ var busfactor = {
             
             busfactor.drawFiles(files, sortedFiles);
             
-            for (var i = 0; i < sortedFiles.length; i++) {
+/*            for (var i = 0; i < sortedFiles.length; i++) {
                 var file = files[sortedFiles[i]];
                 console.log('The file (' + file.name + ') was edited ' + file.commitCount + ' time(s) by');
                 _.each(file.committers, function(committer) {
                     console.log('    ' + committer.author + ' ' + committer.count + ' time(s)');
                 });
-            }
+            }*/
 
         });
     },
@@ -73,7 +73,7 @@ var busfactor = {
         });
         var maxCommitters = files[filesByCommitNum[filesByCommitNum.length - 1]].commitCount;
         var minCommitters = files[filesByCommitNum[0]].commitCount;
-        var commitBump = Math.floor(width / ((maxCommitters - minCommitters) + 1));
+        var commitBump = Math.floor(width / ((maxCommitters - minCommitters)));
         
         console.log('height: ' + height);
         console.log('width: ' + width);
@@ -102,9 +102,18 @@ var busfactor = {
             $('#busGraph').append(countStripe);
             
             var countLabel = $('<div class="busGraphLabel">' + i + '</div>');
-            countLabel.css('top', (height - ((i) * bump)) + 'px');
-            countLabel.css('left', (width - 10) + 'px');
+            countLabel.css('top', ((height - ((i) * bump)) + 5) + 'px');
+            countLabel.css('left', 10 + 'px');
             $('#busGraph').append(countLabel);
+        }
+        
+        // Now we'll draw the commit counts at the bottom
+        for (var j = minCommitters; j <= maxCommitters; j += Math.floor(maxCommitters / 4)) {
+            busfactor.addCommitterLabel((((j - minCommitters) * commitBump)), height, j, height);
+        }
+        console.log('j: ' + j);
+        if (j > maxCommitters) {
+            busfactor.addCommitterLabel((((maxCommitters - minCommitters) * commitBump)), height, maxCommitters, height);
         }
         
         // Now we'll add the files
@@ -114,11 +123,24 @@ var busfactor = {
             var fileLabel = $('<div class="busGraphItem">' + fileName + '</div>');
             var r = busfactor.getRandomArbitrary(0, bump - (bump / 3));
             fileLabel.css('top', (((height - (((Object.keys(file.committers).length - 1) * bump))) - bump) + r) + 'px');
-            fileLabel.css('left', ((file.commitCount - 1) * commitBump) + 'px');
-            console.log(fileName + ' had a commit count of ' + file.commitCount);
+            fileLabel.css('left', (((file.commitCount) - minCommitters) * commitBump) + 'px');
             $('#busGraph').append(fileLabel);
         });
         
+        
+    },
+    
+    addCommitterLabel: function(/*int*/ x, /*int*/ y, /*int*/ count, /*int*/ totalHeight) {
+        var commitLabel = $('<div class="busGraphCommitCountLabel">' + count + '</div>');
+        commitLabel.css('top', y + 'px');
+        commitLabel.css('left', x + 'px');
+        $('#busGraph').append(commitLabel);
+        
+        var commitLine = $('<div class="busGraphCommitCountLine"></div>');
+        commitLine.css('top', '0px');
+        commitLine.css('left', (x + (commitLabel.width() / 2)) + 'px');
+        commitLine.css('height', totalHeight + 'px');
+        $('#busGraph').append(commitLine);
         
     },
     
