@@ -1,0 +1,29 @@
+#busGraph {
+    position: relative;
+    height: 90%;
+    width: 25%;
+    float: right;
+    margin-top: 25px;
+    border-radius: 4px;
+}
+
+#busGraph .busGraphItem {
+    position: absolute;
+}
+
+#busGraph .busGraphLabel {
+    position: absolute;
+}
+
+#busGraph .busGraphStripe {
+    position: absolute;
+    border-right: thin solid lightgray;
+}
+
+#busGraph .busGraphStripe.even {
+    background: white;
+}
+
+#busGraph .busGraphStripe.odd {
+    background: #f1f1f1;
+}
