@@ -1,5 +1,5 @@
 var busfactor = {
-    authorMax: 999999,
+    authorMax: 15,
     files: null,
     oneMonthAgo: moment().subtract(1, 'months'),
     
@@ -220,7 +220,7 @@ var busfactor = {
 
 jQuery(document).ready(function() {
     $('#busGraph').css('height', ($(window).height() - 50) + 'px');
-    busfactor.loadLog('sample/hbo.log');
+    busfactor.loadLog('sample/rails.log');
     
 
     $(document).tooltip({
@@ -248,7 +248,7 @@ jQuery(document).ready(function() {
                 var count = 0;
                 var length = Object.keys(file.committers).length;
                 _.each(file.committers, function(committer) {
-                    if (count === length - 1) {
+                    if (count > 0 && count === length - 1) {
                         people += ', and ';
                     } else if (count > 0) {
                         people += ', ';
@@ -258,9 +258,6 @@ jQuery(document).ready(function() {
                     count++;
                 });
                 
-                if (Object.keys(file.committers).length === 1) {
-                    people += ' person';
-                } 
             }
             
             return title + ' was edited ' + editCount + ' by ' + 
