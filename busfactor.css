@@ -1,7 +1,7 @@
 #busGraph {
     position: relative;
     height: 90%;
-    width: 50%;
+    width: 90%;
     float: left;
     margin-top: 25px;
     border-radius: 4px;
@@ -9,10 +9,17 @@
 
 #busGraph .busGraphItem {
     position: absolute;
+    background: red;
+    width: 3px;
+    height: 3px;
+    border-radius: 2px;
 }
 
 #busGraph .busGraphLabel {
     position: absolute;
+    font-size: 0.8em;
+    color: gray;
+    line-height: 0.8em;
 }
 
 #busGraph .busGraphCommitCountLabel {
@@ -37,4 +44,8 @@
 
 #busGraph .busGraphStripe.odd {
     background: #f1f1f1;
+}
+
+#inprogress {
+    display: none;
 }

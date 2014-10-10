@@ -1,4 +1,5 @@
 var busfactor = {
+    authorMax: 999999,
     
     loadLog: function(/*String*/ url) {
         $.get(url, function (data) {
@@ -43,6 +44,10 @@ var busfactor = {
             
             sortedFiles.reverse();
             
+            sortedFiles = _.filter(sortedFiles, function(fileName) {
+                return Object.keys(files[fileName].committers).length <= busfactor.authorMax;
+            });
+            
             busfactor.drawFiles(files, sortedFiles);
             
 /*            for (var i = 0; i < sortedFiles.length; i++) {
@@ -59,7 +64,7 @@ var busfactor = {
     drawFiles: function(/*Map*/ files, /*Array*/ sortedFiles) {
         var height = $('#busGraph').height() - 20;
         var width = $('#busGraph').width();
-        var max = Object.keys(files[sortedFiles[0]].committers).length;
+        var max = Math.min(Object.keys(files[sortedFiles[0]].committers).length, busfactor.authorMax);
         var min = Object.keys(files[sortedFiles[sortedFiles.length - 1]].committers).length;
         var bump = Math.floor(height / ((max - min) + 1));
         
@@ -71,17 +76,18 @@ var busfactor = {
         filesByCommitNum = _.sortBy(filesByCommitNum, function(fileName) {
             return files[fileName].commitCount;
         });
-        var maxCommitters = files[filesByCommitNum[filesByCommitNum.length - 1]].commitCount;
-        var minCommitters = files[filesByCommitNum[0]].commitCount;
-        var commitBump = Math.floor(width / ((maxCommitters - minCommitters)));
+        var maxCommits = files[filesByCommitNum[filesByCommitNum.length - 1]].commitCount;
+        
+        var minCommits = files[filesByCommitNum[0]].commitCount;
+        var commitBump = width / (maxCommits - minCommits);
         
         console.log('height: ' + height);
         console.log('width: ' + width);
         console.log('max: ' + max);
         console.log('min: ' + min);
         console.log('bump: ' + bump);
-        console.log('maxCommitters: ' + maxCommitters);
-        console.log('minCommitters: ' + minCommitters);
+        console.log('maxCommits: ' + maxCommits);
+        console.log('minCommits: ' + minCommits);
         console.log('commitBump: ' + commitBump);
         
         
@@ -93,6 +99,7 @@ var busfactor = {
             countStripe.css('left', '0px');
             countStripe.css('width', width + 'px');
             countStripe.css('height', bump + 'px');
+            countStripe.attr('count', i);
             
             if (i % 2 === 0) {
                 countStripe.addClass('even');
@@ -102,28 +109,29 @@ var busfactor = {
             $('#busGraph').append(countStripe);
             
             var countLabel = $('<div class="busGraphLabel">' + i + '</div>');
-            countLabel.css('top', ((height - ((i) * bump)) + 5) + 'px');
+            countLabel.css('top', ((height - ((i) * bump))) + 'px');
             countLabel.css('left', 10 + 'px');
             $('#busGraph').append(countLabel);
         }
         
         // Now we'll draw the commit counts at the bottom
-        for (var j = minCommitters; j <= maxCommitters; j += Math.floor(maxCommitters / 4)) {
-            busfactor.addCommitterLabel((((j - minCommitters) * commitBump)), height, j, height);
+        for (var j = minCommits; j <= maxCommits; j += Math.floor(maxCommits / 8)) {
+            busfactor.addCommitterLabel((((j - minCommits) * commitBump)), height, j, height);
         }
-        console.log('j: ' + j);
-        if (j > maxCommitters) {
-            busfactor.addCommitterLabel((((maxCommitters - minCommitters) * commitBump)), height, maxCommitters, height);
+
+/*        if (j > maxCommits) {
+            busfactor.addCommitterLabel((((maxCommits - minCommits) * commitBump)), height, maxCommits, height);
         }
+*/
         
         // Now we'll add the files
         _.each(sortedFiles, function(fileName) {
             var file = files[fileName];
             
-            var fileLabel = $('<div class="busGraphItem">' + fileName + '</div>');
+            var fileLabel = $('<div class="busGraphItem" title="' + fileName + '"></div>');
             var r = busfactor.getRandomArbitrary(0, bump - (bump / 3));
             fileLabel.css('top', (((height - (((Object.keys(file.committers).length - 1) * bump))) - bump) + r) + 'px');
-            fileLabel.css('left', (((file.commitCount) - minCommitters) * commitBump) + 'px');
+            fileLabel.css('left', (((file.commitCount) - minCommits) * commitBump) + 'px');
             $('#busGraph').append(fileLabel);
         });
         
@@ -182,8 +190,7 @@ var busfactor = {
 
 jQuery(document).ready(function() {
     $('#busGraph').css('height', ($(window).height() - 50) + 'px');
-    
-    busfactor.loadLog('sample/hbo.log');
+    busfactor.loadLog('sample/wordpress.log');
     
     
     

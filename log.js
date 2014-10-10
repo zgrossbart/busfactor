@@ -42,7 +42,13 @@ var bflog = {
                 } else {
                     currentLog.commit = line.substring(bflog.ITEM_START.length, line.length).trim();
                 }
-                logs.push(currentLog);
+                
+                if (line.indexOf('refs/tags/') === -1) {
+                    // We want to filer out tags since they cause a lot of commits, but
+                    // don't really count as a change.
+                    logs.push(currentLog);
+                }
+                
             } else if (currentLog === null) {
                 // This represnts a parsing error.  We should always have a current
                 // log entry if we aren't starting a new log.
