@@ -1,11 +1,14 @@
 var busfactor = {
     authorMax: 999999,
+    files: null,
+    oneMonthAgo: moment().subtract(1, 'months'),
     
     loadLog: function(/*String*/ url) {
         $.get(url, function (data) {
             var logs = bflog.parseLog(data);
           
             var files = {};
+            busfactor.files = files;
             var sortedFiles = [];
           
             for (var i = logs.length - 1; i >= 0; i--) {
@@ -33,6 +36,8 @@ var busfactor = {
                         busfactor.addToArray(sortedFiles, fileName);
                         busfactor.incrementCommitter(files[fileName], logs[i].author);
                     }
+                    
+                    busfactor.addDate(file, logs[i].date);
                 }
             }
 
@@ -152,6 +157,17 @@ var busfactor = {
         
     },
     
+    addDate: function(/*Object*/ file, /*Date*/ date) {
+        if (!file.startDate) {
+            file.startDate = date;
+            file.endDate = date;
+        } else if (date.isBefore(file.startDate)) {
+            file.startDate = date;
+        } else if (date.isAfter(file.endDate)) {
+            file.endDate = date;
+        }
+    },
+    
     getRandomArbitrary: function(/*int*/ min, /*int*/ max) {
         return Math.random() * (max - min) + min;
     },
@@ -184,13 +200,78 @@ var busfactor = {
         
         committer.count = committer.count + 1;
         file.commitCount = file.commitCount + 1;
-    }
+    },
     
+    format: function(/*Date*/ date) {
+        if (date.isBefore(busfactor.oneMonthAgo)) {
+            return date.format('MMMM Do YYYY');
+        } else {
+            return date.fromNow();
+        }
+    },
+    
+    escapeHTML: function(/*String*/ string) {
+        var pre = document.createElement('pre');
+        var text = document.createTextNode(string);
+        pre.appendChild(text);
+        return pre.innerHTML;
+    }
 };
 
 jQuery(document).ready(function() {
     $('#busGraph').css('height', ($(window).height() - 50) + 'px');
-    busfactor.loadLog('sample/wordpress.log');
+    busfactor.loadLog('sample/hbo.log');
+    
+
+    $(document).tooltip({
+        items: "#busGraph .busGraphItem",
+        
+        content: function() {
+            var element = $(this);
+            var file = busfactor.files[element.attr('title')];
+            
+            var title = element.attr('title');
+            
+            for (var i = title.length; i >= 0; i -= 10) {
+                title = title.slice(0, i) + '&#173;' + title.slice(i, title.length);
+            }
+            
+            var editCount = file.commitCount + ' times';
+            if (file.commitCount === 1) {
+                editCount = 'one time';
+            }
+            
+            var people = Object.keys(file.committers).length + ' people';
+            
+            if (Object.keys(file.committers).length < 4) {
+                people = '';
+                var count = 0;
+                var length = Object.keys(file.committers).length;
+                _.each(file.committers, function(committer) {
+                    if (count === length - 1) {
+                        people += ', and ';
+                    } else if (count > 0) {
+                        people += ', ';
+                    }
+                    
+                    people += committer.author.trim();
+                    count++;
+                });
+                
+                if (Object.keys(file.committers).length === 1) {
+                    people += ' person';
+                } 
+            }
+            
+            return title + ' was edited ' + editCount + ' by ' + 
+                busfactor.escapeHTML(people) + 
+                ' between ' + busfactor.format(file.startDate) + 
+                ' and ' + busfactor.format(file.endDate);
+        },
+        
+        tooltipClass: "busfactorTooltip",
+        
+    });
     
     
     
