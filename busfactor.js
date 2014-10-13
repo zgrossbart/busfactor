@@ -5,7 +5,6 @@ var busfactor = {
     
     loadLog: function(/*String*/ data) {
         $('#inprogress').show();
-        $('#inprogress').text('Loading your log...');
         
         $('#logErrCont').hide();
         $('#busGraphCont').show();
@@ -30,8 +29,6 @@ var busfactor = {
         var files = {};
         busfactor.files = files;
         var sortedFiles = [];
-        
-        $('#inprogress').text('Finding interesting tidbits...');
       
         for (var i = logs.length - 1; i >= 0; i--) {
             for (var j = 0; j < logs[i].files.length; j++) {
@@ -76,8 +73,6 @@ var busfactor = {
         sortedFiles = _.filter(sortedFiles, function(fileName) {
             return Object.keys(files[fileName].committers).length <= busfactor.authorMax;
         });
-        
-        $('#inprogress').text('Drawing your data...');
         
         busfactor.drawFiles(files, sortedFiles);
         
