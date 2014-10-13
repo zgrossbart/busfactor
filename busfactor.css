@@ -1,3 +1,50 @@
+body {
+    background: #fff;
+    color: #000;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: "ff-basic-gothic-web-pro", Verdana,Arial,Sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+pre {
+    font-size: 11px;
+}
+
+h1 {
+    font-family: "ff-basic-gothic-web-pro", Verdana,Arial,Sans-serif;
+    font-weight: bold;
+}
+
+h2 {
+    margin: 0px;
+}
+
+div.mainText {
+    margin: 0 auto;
+    width: 600px;
+}
+
+#logLinks a {
+    margin-right: 2em;
+}
+
+#logErrCont {
+    display: none;
+    background: white;
+    padding: 1em;
+    margin-top: 1em;
+    border: thin solid #CC0000;
+    border-radius: 6px;
+}
+
 #busGraph {
     position: relative;
     height: 90%;
@@ -5,14 +52,39 @@
     float: left;
     margin-top: 25px;
     border-radius: 4px;
+    left: 14px;
+}
+
+#busGraphCont {
+    display: none;
+    position: relative;
+    margin: 0 auto;
+    width: 90%;
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+#pickAgain {
+    position: absolute;
+    display: block;
+    top: 0px;
+    right: 0px;
+}
+
+#graphTitle {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: -1em;
+    left: 0px;
 }
 
 #busGraph .busGraphItem {
     position: absolute;
-    background: red;
+    background: #ee2a33;
     width: 5px;
     height: 5px;
-    border-radius: 2px;
+    border-radius: 2.5px;
 }
 
 #busGraph .busGraphLabel {
@@ -20,6 +92,7 @@
     font-size: 0.8em;
     color: gray;
     line-height: 0.8em;
+    z-index: 4;
 }
 
 #busGraph .busGraphCommitCountLabel {
@@ -31,7 +104,8 @@
 #busGraph .busGraphCommitCountLine {
     position: absolute;
     width: 1px;
-    background: blue;
+    background: rgb(0, 174, 239);
+    opacity: 0.35;
 }
 
 #busGraph .busGraphStripe {
@@ -48,4 +122,53 @@
 
 #inprogress {
     display: none;
+    position: absolute;
+    top: 40%;
+    width: 400px;
+    border: thin solid gray;
+    border-radius: 6px;
+    font-size: 18px;
+    padding: 1em;
+    left: 30%;
+    background: lightblue;
+}
+
+#committerGraphLabel {
+    position: absolute;
+    left: -6.25em;
+    top: 45%;
+    display: block;
+
+    /* Safari */
+    -webkit-transform: rotate(-90deg);
+
+    /* Firefox */
+    -moz-transform: rotate(-90deg);
+
+    /* IE */
+    -ms-transform: rotate(-90deg);
+
+    /* Opera */
+    -o-transform: rotate(-90deg);
+
+    /* Internet Explorer */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+}
+
+#commitsGraphLabel {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+    left: 0px;
+}
+
+#logPicker {
+    padding: 2em;
+    background: #e9e9e9;
+    border: thin solid lightgray;
+    border-radius: 6px;
+    width: 600px;
+    margin: 2em auto;
 }

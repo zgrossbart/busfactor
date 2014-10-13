@@ -10,22 +10,12 @@
         <script src="lib/moment.js" type="text/javascript" charset="utf-8"></script>
         <script src="log.js" type="text/javascript" charset="utf-8"></script>
         <script src="busfactor.js" type="text/javascript" charset="utf-8"></script>
-        <!--<script src="paper.js" type="text/javascript" charset="utf-8"></script>-->
         <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js" type="text/javascript" charset="utf-8"></script>
         
         <link rel="stylesheet" href="busfactor.css" type="text/css" media="screen">
-        <!--<script type="text/paperscript" canvas="canvas" src="recycle.js"></script>-->
-        
-        <!--<script type="text/javascript">
-            jQuery(document).ready(function() {
-                if (!!document.createElement('canvas').getContext) {
-                    $('#nocanvas').hide();
-                }
-            });
-        </script>-->
-        
-        <!--<script type="text/javascript" src="//use.typekit.net/ran8aft.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>-->
+                
+        <script type="text/javascript" src="//use.typekit.net/ran8aft.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
         
         <!--<script type="text/javascript">
             var _gaq = _gaq || [];
@@ -41,7 +31,62 @@
     </head> 
     <body>
         
-        <div id="busGraph"></div>
+        <div class="mainText">
+            <h1>Bus Factor</h1>
+            <p>
+                Your bus factor is a simple metric; how many people need to get hit by a bus before nobody understands the code.  You want a big number for all your source files, but it's easy to miss a few files or let someone create a code kingdom without realizing it.
+            </p>
+            
+            <p>
+                This page spelunks your GIT logs and finds files with a low busfactor.  Just run the log command and try it out, or select from a few popular repositories.
+            </p>
+        </div>
+        
+        
+        <div id="logPicker">
+            <h2>Get started</h2>
+            <p>Copy this command and paste it into a terminal in your GIT repository directory.</p>
+            <pre id="logInstr">git log --abbrev-commit --decorate --all --name-status --date=iso --source > mylog.txt</pre>
+            
+            <p>Now select the mylog.txt file</p>
+            <input type="file" id="logFile" onchange="busfactor.handleFiles(this.files)">
+            
+            <p style="margin-top: 2em;">...or you can select a popular repository:</p>
+            
+            <p id="logLinks">
+                <a href="sample/jquery.log">jQuery</a>
+                <a href="sample/node.log">Node.js</a>
+                <a href="sample/rails.log">Ruby on Rails</a>
+                <a href="sample/wordpress.log">Wordpress</a>
+            </p>
+            
+            <div id="logErrCont">
+                <p>It looks like there was an error loading your log file.</p>
+                <div id="logError"></div>
+                <p>Please select a different log file and try again.</p>
+            </div>
+        </div>
+        
+        <div id="busGraphCont">
+            <h2 id="graphTitle"></h2>
+            <a href="#" id="pickAgain">Pick a different log file</a>
+            <span id="committerGraphLabel">The number of committers</span>
+            <span id="commitsGraphLabel">The number of times this file has been changed</span>
+            <div id="busGraph">
+            
+            </div>
+        </div>
+        
+        <div class="mainText">
+            <h2>How it works</h2>
+            <p>
+                This log graph was created with JavaScript, HTML, and CSS.  The graph does not use SVG or canvas.  
+            </p>
+            
+            <p>
+                Created by <a href="http://www.zackgrossbart.com">Zack Grossbart</a>
+            </p>
+        </div>
         
         <div id="inprogress">We're crunching your log file...</div>
           

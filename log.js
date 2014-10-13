@@ -52,7 +52,7 @@ var bflog = {
             } else if (currentLog === null) {
                 // This represnts a parsing error.  We should always have a current
                 // log entry if we aren't starting a new log.
-                throw('Invalid logging line.  We expected the beginning of a new log entry and we found: ' + line);
+                throw('We expected the beginning of a new log entry on line ' + (i + 1) + ' and we found: ' + line);
                 
             } else if (line.indexOf(bflog.AUTHOR_START) === 0) {
                 // This means we're at the Author line.  It looks like this:

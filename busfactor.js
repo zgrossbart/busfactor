@@ -1,69 +1,112 @@
 var busfactor = {
-    authorMax: 15,
+    authorMax: 20,
     files: null,
     oneMonthAgo: moment().subtract(1, 'months'),
     
-    loadLog: function(/*String*/ url) {
-        $.get(url, function (data) {
-            var logs = bflog.parseLog(data);
-          
-            var files = {};
-            busfactor.files = files;
-            var sortedFiles = [];
-          
-            for (var i = logs.length - 1; i >= 0; i--) {
-                for (var j = 0; j < logs[i].files.length; j++) {
-                    var fileName = logs[i].files[j].name;
-                    if (fileName.indexOf('README.md') === 0) {
-                        // We don't care about the README.md file
-                        continue;
-                    }
-                    
-                    if (!files[fileName]) {
-                        var file = {};
-                        file.committers = {};
-                      
-                        files[fileName] = file;
-                        file.name = fileName;
-                        file.commitCount = 0;
-                    }
-                    
-                    if (logs[i].files[j].action === bflog.DELETE) {
-                        // Then this file was deleted and we don't care about it
-                        delete files[fileName];
-                        busfactor.removeFromArray(sortedFiles, fileName);
-                    } else {
-                        busfactor.addToArray(sortedFiles, fileName);
-                        busfactor.incrementCommitter(files[fileName], logs[i].author);
-                    }
-                    
-                    busfactor.addDate(file, logs[i].date);
+    loadLog: function(/*String*/ data) {
+        $('#inprogress').show();
+        $('#inprogress').text('Loading your log...');
+        
+        $('#logErrCont').hide();
+        $('#busGraphCont').show();
+        $('#busGraph').css('height', ($(window).height() - 100) + 'px');
+        $('#busGraphCont').css('height', ($(window).height() - 50) + 'px');
+        
+        var logs = null;
+        
+        try {
+            logs = bflog.parseLog(data);
+        } catch (e) {
+            $('#logPicker').hide();
+            $('#logErrCont').show();
+            $('#logError').text(e);
+            $('#inprogress').hide();
+            $('#busGraphCont').hide();
+            return;
+        }
+        
+        $('#logPicker').hide();
+      
+        var files = {};
+        busfactor.files = files;
+        var sortedFiles = [];
+        
+        $('#inprogress').text('Finding interesting tidbits...');
+      
+        for (var i = logs.length - 1; i >= 0; i--) {
+            for (var j = 0; j < logs[i].files.length; j++) {
+                var fileName = logs[i].files[j].name;
+                if (fileName.indexOf('README.md') === 0) {
+                    // We don't care about the README.md file
+                    continue;
+                }
+                
+                
+                
+                if (!files[fileName]) {
+                    var file = {};
+                    file.committers = {};
+                  
+                    files[fileName] = file;
+                    file.name = fileName;
+                    file.commitCount = 0;
+                }
+                
+                
+                if (logs[i].files[j].action === bflog.DELETE) {
+                    // Then this file was deleted and we don't care about it
+                    delete files[fileName];
+                    busfactor.removeFromArray(sortedFiles, fileName);
+                } else {
+                    busfactor.addDate(files[fileName], logs[i].date);
+                    busfactor.addToArray(sortedFiles, fileName);
+                    busfactor.incrementCommitter(files[fileName], logs[i].author);
                 }
             }
+        }
 
-            //We want to sort the files by the number of different committers
-            sortedFiles = _.sortBy(sortedFiles, function(fileName) {
-                
-                return Object.keys(files[fileName].committers).length;
-            });
+        //We want to sort the files by the number of different committers
+        sortedFiles = _.sortBy(sortedFiles, function(fileName) {
             
-            sortedFiles.reverse();
-            
-            sortedFiles = _.filter(sortedFiles, function(fileName) {
-                return Object.keys(files[fileName].committers).length <= busfactor.authorMax;
-            });
-            
-            busfactor.drawFiles(files, sortedFiles);
-            
-/*            for (var i = 0; i < sortedFiles.length; i++) {
-                var file = files[sortedFiles[i]];
-                console.log('The file (' + file.name + ') was edited ' + file.commitCount + ' time(s) by');
-                _.each(file.committers, function(committer) {
-                    console.log('    ' + committer.author + ' ' + committer.count + ' time(s)');
-                });
-            }*/
-
+            return Object.keys(files[fileName].committers).length;
         });
+        
+        sortedFiles.reverse();
+        
+        sortedFiles = _.filter(sortedFiles, function(fileName) {
+            return Object.keys(files[fileName].committers).length <= busfactor.authorMax;
+        });
+        
+        $('#inprogress').text('Drawing your data...');
+        
+        busfactor.drawFiles(files, sortedFiles);
+        
+        $('#inprogress').hide();
+        
+/*            for (var i = 0; i < sortedFiles.length; i++) {
+            var file = files[sortedFiles[i]];
+            console.log('The file (' + file.name + ') was edited ' + file.commitCount + ' time(s) by');
+            _.each(file.committers, function(committer) {
+                console.log('    ' + committer.author + ' ' + committer.count + ' time(s)');
+            });
+        }*/
+        
+        $('html, body').animate({ 
+               scrollTop: $('#busGraphCont').offset().top - 30
+           }, 
+           1400, 
+           'easeOutQuint'
+        );
+        
+    },
+    
+    showProgress: function() {
+        $('#logPicker').hide();
+        $('#inprogress').show();
+    },
+    
+    hideProgress: function() {
+        busfactor.inProgress = false;
     },
     
     drawFiles: function(/*Map*/ files, /*Array*/ sortedFiles) {
@@ -86,7 +129,7 @@ var busfactor = {
         var minCommits = files[filesByCommitNum[0]].commitCount;
         var commitBump = width / (maxCommits - minCommits);
         
-        console.log('height: ' + height);
+/*        console.log('height: ' + height);
         console.log('width: ' + width);
         console.log('max: ' + max);
         console.log('min: ' + min);
@@ -94,6 +137,7 @@ var busfactor = {
         console.log('maxCommits: ' + maxCommits);
         console.log('minCommits: ' + minCommits);
         console.log('commitBump: ' + commitBump);
+        */
         
         
         // We'll start by drawing the counts at the side of the graph
@@ -114,8 +158,8 @@ var busfactor = {
             $('#busGraph').append(countStripe);
             
             var countLabel = $('<div class="busGraphLabel">' + i + '</div>');
-            countLabel.css('top', ((height - ((i) * bump))) + 'px');
-            countLabel.css('left', 10 + 'px');
+            countLabel.css('top', ((height - ((i) * bump)) + 3) + 'px');
+            countLabel.css('left', 5 + 'px');
             $('#busGraph').append(countLabel);
         }
         
@@ -215,16 +259,50 @@ var busfactor = {
         var text = document.createTextNode(string);
         pre.appendChild(text);
         return pre.innerHTML;
+    },
+    
+    handleFiles: function(files) {
+        var reader = new FileReader();
+        
+        reader.onload = (function(theFile) {
+            return function(e) {
+                busfactor.showProgress();
+                $('#graphTitle').text('Bus factor for ' + theFile.name);
+                setTimeout(function() {
+                   busfactor.loadLog(e.target.result);
+                }, 100);
+            };
+        })(files[0]);
+        
+        reader.readAsText(files[0]);
     }
 };
 
-jQuery(document).ready(function() {
-    $('#busGraph').css('height', ($(window).height() - 50) + 'px');
-    busfactor.loadLog('sample/rails.log');
+jQuery(document).ready(function() {    
+//    busfactor.loadLog('sample/hbo.log');
+
+    $('#logLinks a').click(function(evt) {
+        evt.preventDefault();
+        var title = $(this).text();
+        $.get($(this).attr('href'), function (data) {
+            busfactor.showProgress();
+            $('#graphTitle').text('Bus factor for ' + title);
+            setTimeout(function() {
+               busfactor.loadLog(data); 
+            }, 100);
+        });       
+    });
+    
+    $('#pickAgain').click(function(evt) {
+        evt.preventDefault();
+        $('#busGraphCont').hide();
+        $('#logPicker').show();
+        $('#busGraph').empty();
+    });
     
 
     $(document).tooltip({
-        items: "#busGraph .busGraphItem",
+        items: '#busGraph .busGraphItem',
         
         content: function() {
             var element = $(this);
@@ -266,7 +344,7 @@ jQuery(document).ready(function() {
                 ' and ' + busfactor.format(file.endDate);
         },
         
-        tooltipClass: "busfactorTooltip",
+        tooltipClass: 'busfactorTooltip'
         
     });
     
