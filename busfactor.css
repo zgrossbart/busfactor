@@ -124,15 +124,13 @@ div.mainText {
 
 #inprogress {
     display: none;
-    position: absolute;
-    top: 40%;
     width: 400px;
     border: thin solid gray;
     border-radius: 6px;
     font-size: 18px;
     padding: 1em;
-    left: 30%;
     background: lightblue;
+    margin: 3em auto;
 }
 
 #committerGraphLabel {
