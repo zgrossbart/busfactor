@@ -1,3 +1,23 @@
+/*******************************************************************************
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************/
+
+/** 
+ * This file handles all of the GIT log parsing.  It's basically a utility with a single
+ * function, but I wanted to separate it into another file since it's relatively complex.
+ */
 
 /*global bflog:true */
 var bflog = {
@@ -22,8 +42,6 @@ var bflog = {
         for (var i = 0;  i < lines.length; i++) {
             var line = lines[i];
             
-//            console.log('line: ' + line.trim());
-            
             if (line.trim().length === 0) {
                 // Then it was just an empty line and we want to skip it
                 continue;
@@ -44,13 +62,13 @@ var bflog = {
                 }
                 
                 if (line.indexOf('refs/tags/') === -1) {
-                    // We want to filer out tags since they cause a lot of commits, but
+                    // We want to filter out tags since they cause a lot of commits, but
                     // don't really count as a change.
                     logs.push(currentLog);
                 }
                 
             } else if (currentLog === null) {
-                // This represnts a parsing error.  We should always have a current
+                // This represents a parsing error.  We should always have a current
                 // log entry if we aren't starting a new log.
                 throw('We expected the beginning of a new log entry on line ' + (i + 1) + ' and we found: ' + line);
                 
@@ -58,18 +76,15 @@ var bflog = {
                 // This means we're at the Author line.  It looks like this:
                 // Author: Zack Grossbart <zack@grossbart.com>
                 currentLog.author = line.substring(bflog.AUTHOR_START.length, line.length).trim();
-//                console.log('currentLog.author: ' + currentLog.author);
             } else if (line.indexOf(bflog.DATE_START) === 0) {
                 // This means we're at the Date line.  It looks like this:
                 // Date:   2014-09-17 15:10:50 -0400
                 currentLog.date = moment(line.substring(bflog.DATE_START.length, line.length).trim(), 'YYYY-MM-DD HH:mm:ss Z');
-//                console.log('currentLog.date: ' + currentLog.date.format());
             } else if (line.trim().indexOf(bflog.MODIFY_START) === 0 ||
                        line.trim().indexOf(bflog.ADD_START) === 0 ||
                        line.trim().indexOf(bflog.DELETE_START) === 0) {
                 // This means we're at a modify, add, or delete line.  They look like this:
                 // M	data.json
-//                console.log('line: ' + line);
                 var file = {};
                             
                 if (line.trim().indexOf(bflog.MODIFY_START) === 0) {
@@ -84,13 +99,10 @@ var bflog = {
                 }
                 
                 currentLog.files.push(file);
-                
-//                console.log('currentLog.file: ' + currentLog.file.format());
             } else if (line.indexOf('\t') === 0) {
                 // Other lines in the log are comment lines
                 currentLog.comment += line; 
             }
-                
         }
         
         return logs;
