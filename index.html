@@ -30,6 +30,7 @@
         </script>
     </head> 
     <body>
+        <a href="http://github.com/zgrossbart/busfactor" id="forkme"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
         
         <div class="mainText">
             <h1>Bus Factor</h1>
@@ -38,7 +39,11 @@
             </p>
             
             <p>
-                This page spelunks your GIT logs and finds files with a low busfactor.  Just run the log command and try it out, or select from a few popular repositories.
+                This page spelunks your GIT logs and finds files with a low bus factor.  The bus factor isn't just interested in the number people who have changed a file.  One person changing a project configuration file once doesn't make it an interesting bus factor.  We want to look for files which have been edited by a small number of people a large number of times.  
+            </p>
+            
+            <p>
+                Just run the log command and try it out, or select from a few popular repositories.
             </p>
         </div>
         
@@ -80,7 +85,7 @@
         <div class="mainText">
             <h2>How it works</h2>
             <p>
-                This log graph was created with JavaScript, HTML, and CSS.  The graph does not use SVG or canvas.  
+                This graph was created with JavaScript, HTML, and CSS.  The graph does not use SVG or canvas.  It's also all client-side.  You're selecting a file, but it never gets uploaded and there's no server-side support.  We're doing it all right here in your browser.  
             </p>
             
             <p>
