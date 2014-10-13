@@ -284,8 +284,8 @@ jQuery(document).ready(function() {
     $('#logLinks a').click(function(evt) {
         evt.preventDefault();
         var title = $(this).text();
+        busfactor.showProgress();
         $.get($(this).attr('href'), function (data) {
-            busfactor.showProgress();
             $('#graphTitle').text('Bus factor for ' + title);
             setTimeout(function() {
                busfactor.loadLog(data); 
