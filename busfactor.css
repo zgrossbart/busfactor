@@ -14,8 +14,9 @@ a:hover {
     text-decoration: underline;
 }
 
-pre {
+code {
     font-size: 11px;
+    border-bottom: 1px dotted #808080;
 }
 
 h1 {
