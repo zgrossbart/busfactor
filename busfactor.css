@@ -17,6 +17,7 @@ a:hover {
 code {
     font-size: 11px;
     border-bottom: 1px dotted #808080;
+    padding: 3px;
 }
 
 h1 {
